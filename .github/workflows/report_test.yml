@@ -40,7 +40,7 @@ jobs:
           ref: test-action # branch name
           path: test-action-dir # checkout path
 
-      - run: echo 1>>f
+      - run: echo 1>>test-action-dir/f
       - name: Local git-commit-pull-push-action 1
         uses: ./
         with:
@@ -49,7 +49,7 @@ jobs:
           commit_message: message ${{ github.run_id }}
           pull_args: --dry-run
 
-      - run: echo 2>>f
+      - run: echo 2>>test-action-dir/f
       - name: Local git-commit-pull-push-action 2
         uses: ./
         with:
