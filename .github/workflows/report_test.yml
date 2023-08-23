@@ -34,21 +34,22 @@ jobs:
           git status -s -uno
           [ $(git status -s -uno | wc -l | bc ) != "0" ] && exit 1 || echo OK
 
-      # - name: Checkout gh-pages
-      #   uses: actions/checkout@v3
-      #   if: always()
-      #   continue-on-error: true
-      #   with:
-      #     ref: gh-pages # branch name
-      #     path: gh-pages-dir # checkout path
+      - name: Checkout test-action
+        uses: actions/checkout@v3
+        with:
+          ref: test-action # branch name
+          path: test-action-dir # checkout path
 
-      # - name: Local Allure Report Action
-      #   uses: ./ # Uses an action in the root directory
-      #   if: always()
-      #   continue-on-error: true
-      #   id: self_test # used in comment to PR
-      #   with:
-      #     report_id: 'self-test'
-      #     gh_pages: 'gh-pages-dir'
-      #     report_dir: 'allure-results'
-      #     list_dirs: ${{ github.ref == 'refs/heads/main' }}
+      - name: Local git-commit-pull-push-action 1
+        uses: ./ # Uses an action in the root directory
+        with:
+          repository: test-action-dir
+          branch: test-action
+          commit_message: message ${{ github.run_id }}
+          pull_args: --dry-run
+
+      - name: Local git-commit-pull-push-action 2
+        uses: ./ # Uses an action in the root directory
+        with:
+          repository: test-action-dir
+          branch: test-action
