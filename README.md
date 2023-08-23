@@ -15,7 +15,6 @@ Originally designed to run `git pull --rebase -X ours` or `git pull --rebase -X 
 ## Usage
 
 ```yaml
-- run: cd test-action-dir && echo 1>>f && git status -s && git diff --staged --name-only
 - name: Git Commit and Push Action
   uses: mgrybyk/git-commit-pull-push-action@v1
   with:
