@@ -27,7 +27,6 @@ try {
 
     await spawnProcess('git', ['add', '.'], repository)
     const diff = await spawnProcess('git', ['diff', '--staged', '--name-only'], repository)
-    console.log('diff', diff)
     if (diff.trim() === '') {
         console.log('Working tree is empty. Nothing to commit.')
     } else {
