@@ -54,4 +54,4 @@ jobs:
         uses: ./
         with:
           repository: test-action-dir
-          branch: test-action
+          # branch: test-action
