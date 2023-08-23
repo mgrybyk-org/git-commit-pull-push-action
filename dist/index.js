@@ -2723,8 +2723,12 @@ try {
     if (!(await (0,_src_isFileExists_js__WEBPACK_IMPORTED_MODULE_1__/* .isFileExist */ .e)(repository))) {
         throw new Error("repository directory doesn't exist: " + repository);
     }
+    if (branch.trim() === '') {
+        throw new Error('branch is a required field');
+    }
     await (0,_src_spawnProcess_js__WEBPACK_IMPORTED_MODULE_2__/* .spawnProcess */ .y)('git', ['add', '.'], repository);
     const diff = await (0,_src_spawnProcess_js__WEBPACK_IMPORTED_MODULE_2__/* .spawnProcess */ .y)('git', ['diff', '--staged', '--name-only'], repository);
+    console.log('diff', diff);
     if (diff.trim() === '') {
         console.log('Working tree is empty. Nothing to commit.');
     }
