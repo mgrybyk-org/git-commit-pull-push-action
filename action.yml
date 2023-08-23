@@ -1,0 +1,25 @@
+name: 'Git commit, pull & push action'
+description: 'Runs git add, git commit, git pull and git push'
+author: 'mgrybyk'
+branding:
+  icon: 'git-commit'
+  color: 'gray-dark'
+inputs:
+  repository:
+    description: Local file path to the git repository. Defaults to the current directory (`.`)
+    required: true
+    default: '.'
+  branch:
+    description: Git branch name, where changes should be pushed too.
+    required: true
+  commit_message:
+    description: Commit message
+    required: false
+    default: Apply automatic changes
+  pull_args:
+    description: git pull arguments
+    required: false
+    default: --rebase -X ours
+runs:
+  using: 'node16'
+  main: 'dist/index.js'
