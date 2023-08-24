@@ -32,4 +32,4 @@ jobs:
         with:
           branch: ${{ github.head_ref }}
           commit_message: Update screenshots
-          add_args: 'tests/**/*.png'
+          add_args: 'dist/**/*.png'
