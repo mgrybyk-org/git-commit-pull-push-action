@@ -6,11 +6,11 @@ branding:
   color: 'gray-dark'
 inputs:
   repository:
-    description: Local file path to the git repository. Defaults to the current directory (`.`)
+    description: Local file path to the git repository. Defaults to the current directory '.'
     required: true
     default: '.'
   branch:
-    description: Git branch name, where changes should be pushed too.
+    description: Git branch name, where changes should be pushed to.
     required: true
   commit_message:
     description: Commit message
@@ -19,7 +19,11 @@ inputs:
   pull_args:
     description: git pull arguments
     required: false
-    default: --rebase -X ours
+    default: --rebase
+  add_args:
+    description: git add arguments (eg. -u) or 'src/*.js'
+    required: false
+    default: '.'
 runs:
   using: 'node16'
   main: 'dist/index.js'

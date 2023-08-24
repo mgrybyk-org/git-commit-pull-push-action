@@ -2713,12 +2713,14 @@ try {
     const branch = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('branch');
     const commitMessage = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('commit_message');
     const pullArgs = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('pull_args');
+    const addArgs = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('add_args');
     // log
     console.log({
         repository,
         branch,
         commitMessage,
         pullArgs,
+        addArgs,
     });
     if (!(await (0,_src_isFileExists_js__WEBPACK_IMPORTED_MODULE_1__/* .isFileExist */ .e)(repository))) {
         throw new Error("repository directory doesn't exist: " + repository);
@@ -2726,17 +2728,17 @@ try {
     if (branch.trim() === '') {
         throw new Error('branch is a required field');
     }
-    await (0,_src_spawnProcess_js__WEBPACK_IMPORTED_MODULE_2__/* .spawnProcess */ .y)('git', ['add', '.'], repository);
+    await (0,_src_spawnProcess_js__WEBPACK_IMPORTED_MODULE_2__/* .spawnProcess */ .y)('git', ['config', '--global', 'user.name', '"github-actions[bot]"'], repository);
+    await (0,_src_spawnProcess_js__WEBPACK_IMPORTED_MODULE_2__/* .spawnProcess */ .y)('git', ['config', '--global', 'user.email', '"41898282+github-actions[bot]@users.noreply.github.com"'], repository);
+    await (0,_src_spawnProcess_js__WEBPACK_IMPORTED_MODULE_2__/* .spawnProcess */ .y)('git', ['add', ...addArgs.split(' ')], repository);
     const diff = await (0,_src_spawnProcess_js__WEBPACK_IMPORTED_MODULE_2__/* .spawnProcess */ .y)('git', ['diff', '--staged', '--name-only'], repository);
     if (diff.trim() === '') {
         console.log('Working tree is empty. Nothing to commit.');
     }
     else {
+        await (0,_src_spawnProcess_js__WEBPACK_IMPORTED_MODULE_2__/* .spawnProcess */ .y)('git', ['fetch', '--depth=1'], repository);
+        await (0,_src_spawnProcess_js__WEBPACK_IMPORTED_MODULE_2__/* .spawnProcess */ .y)('git', ['checkout', branch], repository);
         await (0,_src_spawnProcess_js__WEBPACK_IMPORTED_MODULE_2__/* .spawnProcess */ .y)('git', [
-            '-c',
-            'user.name="github-actions[bot]"',
-            '-c',
-            'user.email="41898282+github-actions[bot]@users.noreply.github.com"',
             'commit',
             '-m',
             commitMessage,
@@ -2744,7 +2746,7 @@ try {
             '--no-verify',
         ], repository);
         await (0,_src_spawnProcess_js__WEBPACK_IMPORTED_MODULE_2__/* .spawnProcess */ .y)('git', ['pull', ...pullArgs.split(' ')], repository);
-        await (0,_src_spawnProcess_js__WEBPACK_IMPORTED_MODULE_2__/* .spawnProcess */ .y)('git', ['push', '--no-verify', 'origin', branch], repository);
+        console.log(await (0,_src_spawnProcess_js__WEBPACK_IMPORTED_MODULE_2__/* .spawnProcess */ .y)('git', ['push', '--no-verify'], repository));
     }
 }
 catch (error) {
