@@ -1,6 +1,6 @@
 {
   "name": "git-commit-pull-push-action",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Runs git add, git commit, git pull and git push",
   "main": "index.js",
   "type": "module",

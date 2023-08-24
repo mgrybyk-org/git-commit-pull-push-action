@@ -16,6 +16,7 @@ try {
         branch,
         commitMessage,
         pullArgs,
+        addArgs,
     })
 
     if (!(await isFileExist(repository))) {
@@ -34,6 +35,8 @@ try {
     if (diff.trim() === '') {
         console.log('Working tree is empty. Nothing to commit.')
     } else {
+        await spawnProcess('git', ['fetch', '--depth=1'], repository)
+        await spawnProcess('git', ['checkout', branch], repository)
         await spawnProcess(
             'git',
             [
@@ -45,9 +48,8 @@ try {
             ],
             repository
         )
-        await spawnProcess('git', ['pull', 'origin', branch, ...pullArgs.split(' ')], repository)
-        await spawnProcess('git', ['checkout', branch], repository)
-        await spawnProcess('git', ['push', '--no-verify', 'origin', branch], repository)
+        await spawnProcess('git', ['pull', ...pullArgs.split(' ')], repository)
+        console.log(await spawnProcess('git', ['push', '--no-verify'], repository))
     }
 } catch (error) {
     core.setFailed(error.message)
