@@ -2730,6 +2730,8 @@ try {
     }
     await (0,_src_spawnProcess_js__WEBPACK_IMPORTED_MODULE_2__/* .spawnProcess */ .y)('git', ['config', '--global', 'user.name', '"github-actions[bot]"'], repository);
     await (0,_src_spawnProcess_js__WEBPACK_IMPORTED_MODULE_2__/* .spawnProcess */ .y)('git', ['config', '--global', 'user.email', '"41898282+github-actions[bot]@users.noreply.github.com"'], repository);
+    console.log('ls .', await (0,_src_spawnProcess_js__WEBPACK_IMPORTED_MODULE_2__/* .spawnProcess */ .y)('ls', ['-al'], repository));
+    console.log('ls dist', await (0,_src_spawnProcess_js__WEBPACK_IMPORTED_MODULE_2__/* .spawnProcess */ .y)('ls', ['-al', 'dist'], repository));
     console.log('add', await (0,_src_spawnProcess_js__WEBPACK_IMPORTED_MODULE_2__/* .spawnProcess */ .y)('git', ['add', ...addArgs.split(' ')], repository));
     const diff = await (0,_src_spawnProcess_js__WEBPACK_IMPORTED_MODULE_2__/* .spawnProcess */ .y)('git', ['diff', '--staged', '--name-only'], repository);
     console.log('diff', diff);

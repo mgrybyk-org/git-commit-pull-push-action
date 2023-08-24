@@ -30,6 +30,8 @@ try {
     await spawnProcess('git', ['config', '--global', 'user.name', '"github-actions[bot]"'], repository)
     await spawnProcess('git', ['config', '--global', 'user.email', '"41898282+github-actions[bot]@users.noreply.github.com"'], repository)
 
+    console.log('ls .', await spawnProcess('ls', ['-al'], repository))
+    console.log('ls dist', await spawnProcess('ls', ['-al', 'dist'], repository))
     console.log('add', await spawnProcess('git', ['add', ...addArgs.split(' ')], repository))
     const diff = await spawnProcess('git', ['diff', '--staged', '--name-only'], repository)
     console.log('diff', diff)
