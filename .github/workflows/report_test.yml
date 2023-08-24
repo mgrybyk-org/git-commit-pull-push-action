@@ -26,13 +26,32 @@ jobs:
       # you must check out the repository
       - uses: actions/checkout@v3
 
-      - run: mkdir -p dist/z
-      - run: cd dist/z && echo '1' > f1.png
-      - run: cd dist/z && echo '3' >> f3.png
-      - run: rm -f dist/z/f2.png
+      - run: npm ci --no-fund --no-audit --no-progress
+      - run: npm run checks
+      - run: npm run build
+      - name: Make sure dist was commited before push
+        run: |
+          git status -s -uno
+          [ $(git status -s -uno | wc -l | bc ) != "0" ] && exit 1 || echo OK
+
+      - name: Checkout test-action
+        uses: actions/checkout@v3
+        with:
+          ref: test-action # branch name
+          path: test-action-dir # checkout path
+
+      - run: cd test-action-dir && echo '1' >> f && git status -s && git diff --staged --name-only
+      - name: Local git-commit-pull-push-action 1
+        uses: ./
+        with:
+          repository: test-action-dir
+          branch: test-action
+          commit_message: message ${{ github.run_id }}
+          pull_args: --dry-run
+
+      - run: cd test-action-dir && echo '2' >> f && git status -s && git diff --staged --name-only
       - name: Local git-commit-pull-push-action 2
         uses: ./
         with:
-          branch: ${{ github.head_ref }}
-          commit_message: Update screenshots
-          add_args: 'dist/**/*.png'
+          repository: test-action-dir
+          branch: test-action

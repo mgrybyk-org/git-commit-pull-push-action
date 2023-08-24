@@ -30,32 +30,26 @@ try {
     await spawnProcess('git', ['config', '--global', 'user.name', '"github-actions[bot]"'], repository)
     await spawnProcess('git', ['config', '--global', 'user.email', '"41898282+github-actions[bot]@users.noreply.github.com"'], repository)
 
-    console.log('ls .', await spawnProcess('ls', ['-al'], repository))
-    console.log('ls dist', await spawnProcess('ls', ['-al', 'dist'], repository))
-    console.log('add', await spawnProcess('git', ['add', ...addArgs.split(' ')], repository))
+    await spawnProcess('git', ['add', ...addArgs.split(' ')], repository)
     const diff = await spawnProcess('git', ['diff', '--staged', '--name-only'], repository)
-    console.log('diff', diff)
     if (diff.trim() === '') {
         console.log('Working tree is empty. Nothing to commit.')
     } else {
         console.log('fetch', await spawnProcess('git', ['fetch'], repository))
         console.log('checkout', await spawnProcess('git', ['checkout', branch], repository))
-        console.log(
-            'commit',
-            await spawnProcess(
-                'git',
-                [
-                    'commit',
-                    '-m',
-                    commitMessage,
-                    '--author="github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>"',
-                    '--no-verify',
-                ],
-                repository
-            )
+        await spawnProcess(
+            'git',
+            [
+                'commit',
+                '-m',
+                commitMessage,
+                '--author="github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>"',
+                '--no-verify',
+            ],
+            repository
         )
-        console.log('pull', await spawnProcess('git', ['pull', 'origin', branch, ...pullArgs.split(' ')], repository))
-        console.log('push', await spawnProcess('git', ['push', '--no-verify', 'origin', branch], repository))
+        await spawnProcess('git', ['pull', ...pullArgs.split(' ')], repository)
+        await spawnProcess('git', ['push', '--no-verify'], repository)
     }
 } catch (error) {
     core.setFailed(error.message)
