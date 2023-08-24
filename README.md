@@ -19,7 +19,7 @@ Originally designed to run `git pull --rebase -X ours` or `git pull --rebase -X 
   uses: mgrybyk/git-commit-pull-push-action@v1
   with:
     repository: gh-pages
-    branch: gh-pages
+    branch: gh-pages # ${{ github.head_ref }}
     commit_message: Apply automatic changes
     pull_args: --rebase -X ours
 ```
