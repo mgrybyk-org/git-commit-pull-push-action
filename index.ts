@@ -48,6 +48,8 @@ try {
         )
         console.log('git pull')
         await spawnProcess('git', ['pull', 'origin', branch, ...pullArgs.split(' ')], repository)
+        console.log('git checkout')
+        await spawnProcess('git', ['checkout', branch], repository)
         console.log('git push')
         await spawnProcess('git', ['push', '--no-verify', 'origin', branch], repository)
         console.log('DONE!')
