@@ -49,7 +49,20 @@ try {
             repository
         )
         console.log('git pull')
-        await spawnProcess('git', ['pull', 'origin', branch, ...pullArgs.split(' ')], repository)
+        await spawnProcess(
+            'git',
+            [
+                'pull',
+                '-c',
+                'user.name="github-actions[bot]"',
+                '-c',
+                'user.email="41898282+github-actions[bot]@users.noreply.github.com"',
+                'origin',
+                branch,
+                ...pullArgs.split(' '),
+            ],
+            repository
+        )
         console.log('git push')
         await spawnProcess('git', ['push', '--no-verify', 'origin', branch], repository)
         console.log('DONE!')

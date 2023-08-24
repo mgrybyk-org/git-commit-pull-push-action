@@ -2747,7 +2747,16 @@ try {
             '--no-verify',
         ], repository);
         console.log('git pull');
-        await (0,_src_spawnProcess_js__WEBPACK_IMPORTED_MODULE_2__/* .spawnProcess */ .y)('git', ['pull', 'origin', branch, ...pullArgs.split(' ')], repository);
+        await (0,_src_spawnProcess_js__WEBPACK_IMPORTED_MODULE_2__/* .spawnProcess */ .y)('git', [
+            'pull',
+            '-c',
+            'user.name="github-actions[bot]"',
+            '-c',
+            'user.email="41898282+github-actions[bot]@users.noreply.github.com"',
+            'origin',
+            branch,
+            ...pullArgs.split(' '),
+        ], repository);
         console.log('git push');
         await (0,_src_spawnProcess_js__WEBPACK_IMPORTED_MODULE_2__/* .spawnProcess */ .y)('git', ['push', '--no-verify', 'origin', branch], repository);
         console.log('DONE!');
