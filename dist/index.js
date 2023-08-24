@@ -2736,8 +2736,8 @@ try {
         console.log('Working tree is empty. Nothing to commit.');
     }
     else {
-        console.log('fetch', await (0,_src_spawnProcess_js__WEBPACK_IMPORTED_MODULE_2__/* .spawnProcess */ .y)('git', ['fetch'], repository));
-        console.log('checkout', await (0,_src_spawnProcess_js__WEBPACK_IMPORTED_MODULE_2__/* .spawnProcess */ .y)('git', ['checkout', branch], repository));
+        await (0,_src_spawnProcess_js__WEBPACK_IMPORTED_MODULE_2__/* .spawnProcess */ .y)('git', ['fetch'], repository);
+        await (0,_src_spawnProcess_js__WEBPACK_IMPORTED_MODULE_2__/* .spawnProcess */ .y)('git', ['checkout', branch], repository);
         await (0,_src_spawnProcess_js__WEBPACK_IMPORTED_MODULE_2__/* .spawnProcess */ .y)('git', [
             'commit',
             '-m',
@@ -2746,7 +2746,7 @@ try {
             '--no-verify',
         ], repository);
         await (0,_src_spawnProcess_js__WEBPACK_IMPORTED_MODULE_2__/* .spawnProcess */ .y)('git', ['pull', ...pullArgs.split(' ')], repository);
-        await (0,_src_spawnProcess_js__WEBPACK_IMPORTED_MODULE_2__/* .spawnProcess */ .y)('git', ['push', '--no-verify'], repository);
+        console.log(await (0,_src_spawnProcess_js__WEBPACK_IMPORTED_MODULE_2__/* .spawnProcess */ .y)('git', ['push', '--no-verify'], repository));
     }
 }
 catch (error) {

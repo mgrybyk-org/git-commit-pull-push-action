@@ -35,8 +35,8 @@ try {
     if (diff.trim() === '') {
         console.log('Working tree is empty. Nothing to commit.')
     } else {
-        console.log('fetch', await spawnProcess('git', ['fetch'], repository))
-        console.log('checkout', await spawnProcess('git', ['checkout', branch], repository))
+        await spawnProcess('git', ['fetch'], repository)
+        await spawnProcess('git', ['checkout', branch], repository)
         await spawnProcess(
             'git',
             [
@@ -49,7 +49,7 @@ try {
             repository
         )
         await spawnProcess('git', ['pull', ...pullArgs.split(' ')], repository)
-        await spawnProcess('git', ['push', '--no-verify'], repository)
+        console.log(await spawnProcess('git', ['push', '--no-verify'], repository))
     }
 } catch (error) {
     core.setFailed(error.message)
