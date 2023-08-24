@@ -26,7 +26,7 @@ jobs:
       # you must check out the repository
       - uses: actions/checkout@v3
 
-      - run: mkdir dist/z
+      - run: mkdir -p dist/z
       - run: cd dist/z && echo '1' > f1.png
       - run: cd dist/z && echo '3' >> f3.png
       - run: rm -f dist/z/f2.png
