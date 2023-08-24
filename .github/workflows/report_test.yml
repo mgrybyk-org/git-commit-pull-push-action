@@ -26,8 +26,9 @@ jobs:
       # you must check out the repository
       - uses: actions/checkout@v3
 
-      - run: cd dist && echo '1' >> f1.png && cd .. && git status -s && git add dist/**/*.png && git diff --staged --name-only
-      - run: cd dist && echo '2' >> f2.png && git status -s && git diff --staged --name-only
+      - run: mkdir dist/z
+      - run: cd dist/z && echo '1' >> f1.png && cd ../.. && git status -s && git add dist/**/*.png && git diff --staged --name-only
+      - run: cd dist/z && echo '2' >> f2.png && git status -s && git diff --staged --name-only
       - name: Local git-commit-pull-push-action 2
         uses: ./
         with:
