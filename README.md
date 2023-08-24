@@ -11,7 +11,7 @@ The action flow:
 5. `git checkout branch` (to allow push in PRs)
 6. `git push`
 
-Originally designed to run `git pull --rebase -X ours` or `git pull --rebase -X theirs` after commit to help pushing changed to `gh-pages`.
+Originally designed to run `git pull --rebase -X ours` or `git pull --rebase -X theirs` after commit to help pushing changes to `gh-pages`.
 
 ## Usage
 
