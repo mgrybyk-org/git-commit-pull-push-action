@@ -2720,6 +2720,7 @@ try {
         branch,
         commitMessage,
         pullArgs,
+        addArgs,
     });
     if (!(await (0,_src_isFileExists_js__WEBPACK_IMPORTED_MODULE_1__/* .isFileExist */ .e)(repository))) {
         throw new Error("repository directory doesn't exist: " + repository);
@@ -2729,22 +2730,23 @@ try {
     }
     await (0,_src_spawnProcess_js__WEBPACK_IMPORTED_MODULE_2__/* .spawnProcess */ .y)('git', ['config', '--global', 'user.name', '"github-actions[bot]"'], repository);
     await (0,_src_spawnProcess_js__WEBPACK_IMPORTED_MODULE_2__/* .spawnProcess */ .y)('git', ['config', '--global', 'user.email', '"41898282+github-actions[bot]@users.noreply.github.com"'], repository);
-    await (0,_src_spawnProcess_js__WEBPACK_IMPORTED_MODULE_2__/* .spawnProcess */ .y)('git', ['add', ...addArgs.split(' ')], repository);
+    console.log('add', await (0,_src_spawnProcess_js__WEBPACK_IMPORTED_MODULE_2__/* .spawnProcess */ .y)('git', ['add', ...addArgs.split(' ')], repository));
     const diff = await (0,_src_spawnProcess_js__WEBPACK_IMPORTED_MODULE_2__/* .spawnProcess */ .y)('git', ['diff', '--staged', '--name-only'], repository);
+    console.log('diff', diff);
     if (diff.trim() === '') {
         console.log('Working tree is empty. Nothing to commit.');
     }
     else {
-        await (0,_src_spawnProcess_js__WEBPACK_IMPORTED_MODULE_2__/* .spawnProcess */ .y)('git', [
+        console.log('commit', await (0,_src_spawnProcess_js__WEBPACK_IMPORTED_MODULE_2__/* .spawnProcess */ .y)('git', [
             'commit',
             '-m',
             commitMessage,
             '--author="github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>"',
             '--no-verify',
-        ], repository);
-        await (0,_src_spawnProcess_js__WEBPACK_IMPORTED_MODULE_2__/* .spawnProcess */ .y)('git', ['pull', 'origin', branch, ...pullArgs.split(' ')], repository);
-        await (0,_src_spawnProcess_js__WEBPACK_IMPORTED_MODULE_2__/* .spawnProcess */ .y)('git', ['checkout', branch], repository);
-        await (0,_src_spawnProcess_js__WEBPACK_IMPORTED_MODULE_2__/* .spawnProcess */ .y)('git', ['push', '--no-verify', 'origin', branch], repository);
+        ], repository));
+        console.log('pull', await (0,_src_spawnProcess_js__WEBPACK_IMPORTED_MODULE_2__/* .spawnProcess */ .y)('git', ['pull', 'origin', branch, ...pullArgs.split(' ')], repository));
+        console.log('checkout', await (0,_src_spawnProcess_js__WEBPACK_IMPORTED_MODULE_2__/* .spawnProcess */ .y)('git', ['checkout', branch], repository));
+        console.log('push', await (0,_src_spawnProcess_js__WEBPACK_IMPORTED_MODULE_2__/* .spawnProcess */ .y)('git', ['push', '--no-verify', 'origin', branch], repository));
     }
 }
 catch (error) {
