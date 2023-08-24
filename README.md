@@ -21,6 +21,12 @@ Originally designed to run `git pull --rebase -X ours` or `git pull --rebase -X 
     repository: test-action-dir
     branch: test-action
     commit_message: Apply automatic changes
-    pull_args: --rebase -X theirs
+    pull_args: --rebase -X ours
 ```
 
+## Merge strategy specific option
+
+`-X` (same as `--strategy-option`).
+
+- `ours`: option forces conflicting chunks to be auto-resolved cleanly by favoring **our** (current) version (instead of incoming). 
+- `theirs`:  is the opposite of **ours**. 

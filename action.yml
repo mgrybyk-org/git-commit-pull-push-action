@@ -19,7 +19,7 @@ inputs:
   pull_args:
     description: git pull arguments
     required: false
-    default: --rebase -X ours
+    default: --rebase
 runs:
   using: 'node16'
   main: 'dist/index.js'
