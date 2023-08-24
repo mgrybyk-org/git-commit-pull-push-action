@@ -38,6 +38,7 @@ try {
     if (diff.trim() === '') {
         console.log('Working tree is empty. Nothing to commit.')
     } else {
+        console.log('fetch', await spawnProcess('git', ['fetch'], repository))
         console.log('checkout', await spawnProcess('git', ['checkout', branch], repository))
         console.log(
             'commit',
