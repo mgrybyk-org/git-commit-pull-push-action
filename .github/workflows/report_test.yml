@@ -27,8 +27,9 @@ jobs:
       - uses: actions/checkout@v3
 
       - run: mkdir dist/z
-      - run: cd dist/z && echo '1' >> f1.png && cd ../.. && git status -s && git add dist/**/*.png && git diff --staged --name-only
-      - run: cd dist/z && echo '2' >> f2.png && git status -s && git diff --staged --name-only
+      - run: cd dist/z && echo '1' > f1.png
+      - run: cd dist/z && echo '3' >> f3.png
+      - run: rm -f dist/z/f2.png
       - name: Local git-commit-pull-push-action 2
         uses: ./
         with:
