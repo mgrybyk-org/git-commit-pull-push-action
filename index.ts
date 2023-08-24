@@ -26,6 +26,9 @@ try {
         throw new Error('branch is a required field')
     }
 
+    await spawnProcess('git', ['config', '--global', 'user.name', '"github-actions[bot]"'], repository)
+    await spawnProcess('git', ['config', '--global', 'user.email', '"41898282+github-actions[bot]@users.noreply.github.com"'], repository)
+
     await spawnProcess('git', ['add', ...addArgs.split(' ')], repository)
     const diff = await spawnProcess('git', ['diff', '--staged', '--name-only'], repository)
     if (diff.trim() === '') {
@@ -34,10 +37,6 @@ try {
         await spawnProcess(
             'git',
             [
-                '-c',
-                'user.name="github-actions[bot]"',
-                '-c',
-                'user.email="41898282+github-actions[bot]@users.noreply.github.com"',
                 'commit',
                 '-m',
                 commitMessage,
@@ -47,6 +46,7 @@ try {
             repository
         )
         await spawnProcess('git', ['pull', 'origin', branch, ...pullArgs.split(' ')], repository)
+        await spawnProcess('git', ['checkout', branch], repository)
         await spawnProcess('git', ['push', '--no-verify', 'origin', branch], repository)
     }
 } catch (error) {
