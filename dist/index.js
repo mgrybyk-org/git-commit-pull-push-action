@@ -2727,12 +2727,14 @@ try {
     if (branch.trim() === '') {
         throw new Error('branch is a required field');
     }
+    console.log('git add');
     await (0,_src_spawnProcess_js__WEBPACK_IMPORTED_MODULE_2__/* .spawnProcess */ .y)('git', ['add', ...addArgs.split(' ')], repository);
     const diff = await (0,_src_spawnProcess_js__WEBPACK_IMPORTED_MODULE_2__/* .spawnProcess */ .y)('git', ['diff', '--staged', '--name-only'], repository);
     if (diff.trim() === '') {
         console.log('Working tree is empty. Nothing to commit.');
     }
     else {
+        console.log('git commit');
         await (0,_src_spawnProcess_js__WEBPACK_IMPORTED_MODULE_2__/* .spawnProcess */ .y)('git', [
             '-c',
             'user.name="github-actions[bot]"',
@@ -2744,8 +2746,11 @@ try {
             '--author="github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>"',
             '--no-verify',
         ], repository);
+        console.log('git pull');
         await (0,_src_spawnProcess_js__WEBPACK_IMPORTED_MODULE_2__/* .spawnProcess */ .y)('git', ['pull', 'origin', branch, ...pullArgs.split(' ')], repository);
+        console.log('git push');
         await (0,_src_spawnProcess_js__WEBPACK_IMPORTED_MODULE_2__/* .spawnProcess */ .y)('git', ['push', '--no-verify', 'origin', branch], repository);
+        console.log('DONE!');
     }
 }
 catch (error) {
