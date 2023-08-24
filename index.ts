@@ -46,7 +46,7 @@ try {
             ],
             repository
         )
-        await spawnProcess('git', ['pull', ...pullArgs.split(' ')], repository)
+        await spawnProcess('git', ['pull', 'origin', branch, ...pullArgs.split(' ')], repository)
         await spawnProcess('git', ['push', '--no-verify', 'origin', branch], repository)
     }
 } catch (error) {

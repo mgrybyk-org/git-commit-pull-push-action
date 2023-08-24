@@ -2744,7 +2744,7 @@ try {
             '--author="github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>"',
             '--no-verify',
         ], repository);
-        await (0,_src_spawnProcess_js__WEBPACK_IMPORTED_MODULE_2__/* .spawnProcess */ .y)('git', ['pull', ...pullArgs.split(' ')], repository);
+        await (0,_src_spawnProcess_js__WEBPACK_IMPORTED_MODULE_2__/* .spawnProcess */ .y)('git', ['pull', 'origin', branch, ...pullArgs.split(' ')], repository);
         await (0,_src_spawnProcess_js__WEBPACK_IMPORTED_MODULE_2__/* .spawnProcess */ .y)('git', ['push', '--no-verify', 'origin', branch], repository);
     }
 }
