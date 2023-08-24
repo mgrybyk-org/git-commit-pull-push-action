@@ -8,6 +8,7 @@ try {
     const branch = core.getInput('branch')
     const commitMessage = core.getInput('commit_message')
     const pullArgs = core.getInput('pull_args')
+    const addArgs = core.getInput('add_args')
 
     // log
     console.log({
@@ -25,7 +26,7 @@ try {
         throw new Error('branch is a required field')
     }
 
-    await spawnProcess('git', ['add', '.'], repository)
+    await spawnProcess('git', ['add', ...addArgs.split(' ')], repository)
     const diff = await spawnProcess('git', ['diff', '--staged', '--name-only'], repository)
     if (diff.trim() === '') {
         console.log('Working tree is empty. Nothing to commit.')
