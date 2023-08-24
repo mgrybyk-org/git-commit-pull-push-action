@@ -2739,6 +2739,7 @@ try {
         console.log('Working tree is empty. Nothing to commit.');
     }
     else {
+        console.log('checkout', await (0,_src_spawnProcess_js__WEBPACK_IMPORTED_MODULE_2__/* .spawnProcess */ .y)('git', ['checkout', branch], repository));
         console.log('commit', await (0,_src_spawnProcess_js__WEBPACK_IMPORTED_MODULE_2__/* .spawnProcess */ .y)('git', [
             'commit',
             '-m',
@@ -2747,7 +2748,6 @@ try {
             '--no-verify',
         ], repository));
         console.log('pull', await (0,_src_spawnProcess_js__WEBPACK_IMPORTED_MODULE_2__/* .spawnProcess */ .y)('git', ['pull', 'origin', branch, ...pullArgs.split(' ')], repository));
-        console.log('checkout', await (0,_src_spawnProcess_js__WEBPACK_IMPORTED_MODULE_2__/* .spawnProcess */ .y)('git', ['checkout', branch], repository));
         console.log('push', await (0,_src_spawnProcess_js__WEBPACK_IMPORTED_MODULE_2__/* .spawnProcess */ .y)('git', ['push', '--no-verify', 'origin', branch], repository));
     }
 }

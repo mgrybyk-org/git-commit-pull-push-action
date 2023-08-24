@@ -38,6 +38,7 @@ try {
     if (diff.trim() === '') {
         console.log('Working tree is empty. Nothing to commit.')
     } else {
+        console.log('checkout', await spawnProcess('git', ['checkout', branch], repository))
         console.log(
             'commit',
             await spawnProcess(
@@ -53,7 +54,6 @@ try {
             )
         )
         console.log('pull', await spawnProcess('git', ['pull', 'origin', branch, ...pullArgs.split(' ')], repository))
-        console.log('checkout', await spawnProcess('git', ['checkout', branch], repository))
         console.log('push', await spawnProcess('git', ['push', '--no-verify', 'origin', branch], repository))
     }
 } catch (error) {
