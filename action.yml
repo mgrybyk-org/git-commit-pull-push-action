@@ -10,7 +10,7 @@ inputs:
     required: true
     default: '.'
   branch:
-    description: Git branch name, where changes should be pushed to, ex ${{ github.head_ref }}.
+    description: Git branch name, where changes should be pushed to, ex '${{ github.head_ref }}'.
     required: true
   commit_message:
     description: Commit message
