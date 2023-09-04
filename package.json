@@ -1,6 +1,6 @@
 {
   "name": "git-commit-pull-push-action",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "Runs git add, git commit, git pull and git push",
   "main": "index.js",
   "type": "module",
@@ -28,8 +28,8 @@
   },
   "devDependencies": {
     "@types/node": "^16.18.39",
-    "@typescript-eslint/eslint-plugin": "^6.5.0",
-    "@typescript-eslint/parser": "^6.5.0",
+    "@typescript-eslint/eslint-plugin": "^6.6.0",
+    "@typescript-eslint/parser": "^6.6.0",
     "@vercel/ncc": "^0.36.1",
     "eslint": "^8.48.0",
     "eslint-config-prettier": "^9.0.0",
