@@ -18,7 +18,7 @@ Originally designed to run `git pull --rebase -X ours` or `git pull --rebase -X 
 
 ```yaml
 - name: Git Commit and Push Action
-  uses: mgrybyk/git-commit-pull-push-action@v1
+  uses: mgrybyk-org/git-commit-pull-push-action@v1
   with:
     repository: gh-pages
     branch: gh-pages # ${{ github.head_ref }}
