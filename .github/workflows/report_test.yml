@@ -7,13 +7,11 @@ on:
   workflow_dispatch:
 
 permissions:
-  # Give the default GITHUB_TOKEN write permission to commit and push the changed files back to the repository.
   contents: write
 
-# Allow only one job per PR or branch
 concurrency:
   group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
-  cancel-in-progress: true # cancel jobs in progress
+  cancel-in-progress: true
 
 jobs:
   test:
@@ -22,9 +20,7 @@ jobs:
     name: Build, Test, Action
 
     steps:
-      # To use this repository's private action,
-      # you must check out the repository
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - run: npm ci --no-fund --no-audit --no-progress
       - run: npm run checks
@@ -35,7 +31,7 @@ jobs:
           [ $(git status -s -uno | wc -l | bc ) != "0" ] && exit 1 || echo OK
 
       - name: Checkout test-action
-        uses: actions/checkout@v3
+        uses: actions/checkout@v5 # was v3
         with:
           ref: test-action # branch name
           path: test-action-dir # checkout path
