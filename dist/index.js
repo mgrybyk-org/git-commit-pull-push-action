@@ -27916,7 +27916,7 @@ try {
     }
     else {
         await (0,_src_spawnProcess_js__WEBPACK_IMPORTED_MODULE_2__/* .spawnProcess */ .N)('git', ['fetch', '--depth=1'], repository);
-        await (0,_src_spawnProcess_js__WEBPACK_IMPORTED_MODULE_2__/* .spawnProcess */ .N)('git', ['checkout', branch], repository);
+        await (0,_src_spawnProcess_js__WEBPACK_IMPORTED_MODULE_2__/* .spawnProcess */ .N)('git', ['switch', branch], repository);
         await (0,_src_spawnProcess_js__WEBPACK_IMPORTED_MODULE_2__/* .spawnProcess */ .N)('git', [
             'commit',
             '-m',

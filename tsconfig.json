@@ -6,6 +6,7 @@
     "skipLibCheck": true,
     "noEmit": true,
     /* Linting */
+    "types": ["node"],
     "noImplicitAny": true,
     "strictPropertyInitialization": true,
     "strictNullChecks": true,
