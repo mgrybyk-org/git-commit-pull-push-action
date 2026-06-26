@@ -36,7 +36,7 @@ try {
         console.log('Working tree is empty. Nothing to commit.')
     } else {
         await spawnProcess('git', ['fetch', '--depth=1'], repository)
-        await spawnProcess('git', ['checkout', branch], repository)
+        await spawnProcess('git', ['switch', branch], repository)
         await spawnProcess(
             'git',
             [
