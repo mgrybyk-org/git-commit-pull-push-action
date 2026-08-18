@@ -20,7 +20,7 @@ jobs:
     name: Build, Test, Action
 
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
 
       - run: npm ci --no-fund --no-audit --no-progress
       - run: npm run checks

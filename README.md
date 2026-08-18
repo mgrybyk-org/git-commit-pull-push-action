@@ -14,6 +14,8 @@ The action flow:
 
 Originally designed to run `git pull --rebase -X ours` or `git pull --rebase -X theirs` after commit to help pushing changes to `gh-pages`.
 
+If generated changes conflict with a newer version already on the remote branch, `-X ours` keeps the remote version intentionally to avoid conflicts. Use `-X theirs` to keep the generated version instead.
+
 ## Usage
 
 ```yaml
